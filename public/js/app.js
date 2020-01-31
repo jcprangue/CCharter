@@ -11592,6 +11592,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -11653,10 +11659,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      searchText: ''
+      searchText: ""
     };
   },
   computed: {
@@ -11670,7 +11685,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$http.get("/search/list/" + this.searchText).then(function (data) {
         _this.$router.push({
-          name: 'Search-Result',
+          name: "Search-Result",
           params: {
             textsearch: _this.searchText,
             searchResult: data.data
@@ -11736,14 +11751,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       events: [],
-      month: ''
+      month: ""
     };
   },
   methods: {
@@ -12098,8 +12110,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id', 'code'],
+  props: ["id", "code"],
   data: function data() {
     return {
       dtData: {
@@ -12113,7 +12126,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       office: [],
       autocomplete: [],
-      searchText: ''
+      searchText: ""
     };
   },
   watch: {
@@ -12146,13 +12159,14 @@ __webpack_require__.r(__webpack_exports__);
         service_code: this.code
       }).then(function (data) {
         _this2.dtData.data = data.data;
+        _this2.searchText = data.data[0].service_name;
       });
     },
     getOfficeInfor: function getOfficeInfor() {
       var vm = this;
       vm.$http.get("/office/" + vm.id).then(function (data) {
         vm.office = data.data;
-        vm.$store.commit('setActiveOffice', data.data);
+        vm.$store.commit("setActiveOffice", data.data);
       });
     },
     getautocomplete: function getautocomplete() {
@@ -12163,7 +12177,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   destroyed: function destroyed() {
-    this.$store.commit('setActiveOffice', null);
+    this.$store.commit("setActiveOffice", null);
   },
   mounted: function mounted() {
     this.getdeptData();
@@ -12454,8 +12468,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['textsearch', 'searchResult'],
+  props: ["textsearch", "searchResult"],
   data: function data() {
     return {
       dept: [],
@@ -12472,6 +12488,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$http.get("/search/list/" + val).then(function (data) {
         _this.dtData.data = data.data;
+        console.log(_this.dtData.data);
       });
     }
   },
@@ -66104,8 +66121,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-9" }, [
-    _c("div", { staticClass: "container-fluid mt-3" }, [
+  return _c("div", { staticClass: "col-md-9 main-body" }, [
+    _c("div", { staticClass: "container-fluid mt-3 main-div" }, [
       _vm.showtabular
         ? _c(
             "div",
@@ -66158,28 +66175,28 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-4" }, [
                                   _c("label", [
-                                    _vm._v("3. Conduct  sports clinic")
+                                    _vm._v("3. Conduct sports clinic")
                                   ])
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-4" }, [
                                   _c("label", [
                                     _vm._v(
-                                      "4.  Provision of Cash incentives to bemedalled athletes"
+                                      "4. Provision of Cash incentives to bemedalled athletes"
                                     )
                                   ])
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-4" }, [
                                   _c("label", [
-                                    _vm._v("5. Conduct Sports Competition ")
+                                    _vm._v("5. Conduct Sports Competition")
                                   ])
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "col-4" }, [
                                   _c("label", [
                                     _vm._v(
-                                      "6. Provision of financial assistance to sports related activities &  provision of sports supplies, material and equipments  including fabricated basketball boards"
+                                      "6. Provision of financial assistance to sports related activities & provision of sports supplies, material and equipments including fabricated basketball boards"
                                     )
                                   ])
                                 ])
@@ -66192,7 +66209,7 @@ var render = function() {
                   ],
                   null,
                   false,
-                  2422468142
+                  368446638
                 )
               })
             ],
@@ -66204,11 +66221,14 @@ var render = function() {
         ? _c("div", [
             _c(
               "div",
-              { staticClass: "row " },
-              _vm._l(_vm.dtData.data, function(department) {
+              { staticClass: "row" },
+              _vm._l(_vm.dtData.data, function(department, index) {
                 return _c(
                   "div",
-                  { staticClass: "col-md-3 d-flex align-items-stretch" },
+                  {
+                    key: index,
+                    staticClass: "col-md-3 d-flex align-items-stretch"
+                  },
                   [
                     _c(
                       "blockquote",
@@ -66280,10 +66300,13 @@ var render = function() {
                   staticClass: "text-white",
                   attrs: { to: { name: "Main-Panel" } }
                 },
-                [_c("icon", { attrs: { icon: "home" } }), _vm._v(" Home")],
+                [
+                  _c("icon", { attrs: { icon: "home" } }),
+                  _vm._v("Home\n          ")
+                ],
                 1
               ),
-              _vm._v(" | \n                    "),
+              _vm._v("|\n          "),
               _c(
                 "router-link",
                 {
@@ -66292,13 +66315,11 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    " " +
-                      _vm._s(
-                        _vm.activeOffice != null
-                          ? _vm.activeOffice.department
-                          : "Provincial Governement Offices"
-                      ) +
-                      " Citizens Charter"
+                    _vm._s(
+                      _vm.activeOffice != null
+                        ? _vm.activeOffice.department
+                        : "Provincial Governement Offices"
+                    ) + " Citizens Charter"
                   )
                 ]
               )
@@ -66368,80 +66389,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sidenav col-md-3 p-0 overflow-auto" }, [
-    _c("div", { staticClass: "w-100 bg-green-header header-height-15" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "bg-greend-sub-header w-100 px-3 event-header" }, [
-      _c("div", { staticClass: "row align-items-center" }, [
-        _c(
-          "div",
-          { staticClass: "col text-center" },
-          [
-            _c("icon", { attrs: { icon: "calendar-week" } }),
-            _vm._v(" UPCOMING EVENTS")
-          ],
-          1
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "event center m-3" },
-      _vm._l(_vm.events, function(event) {
-        return _c("div", { staticClass: "card mb-3" }, [
-          _c("div", { staticClass: "additional" }, [
-            _c("div", { staticClass: "user-card" }, [
-              _c("div", { staticClass: "calendar date" }, [
-                _c("span", { staticClass: "binds" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "month" }, [
-                  _vm._v(_vm._s(_vm._f("FormatMonth")(event.eventStart)))
+  return _c(
+    "div",
+    {
+      staticClass: "sidenav col-md-3 p-0 overflow-auto",
+      staticStyle: { position: "fixed", "z-index": "99999" }
+    },
+    [
+      _c("div", { staticClass: "w-100 bg-green-header header-height-15" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "bg-greend-sub-header w-100 px-3 event-header" },
+        [
+          _c("div", { staticClass: "row align-items-center" }, [
+            _c(
+              "div",
+              { staticClass: "col text-center" },
+              [
+                _c("icon", { attrs: { icon: "calendar-week" } }),
+                _vm._v("UPCOMING EVENTS\n      ")
+              ],
+              1
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "event center m-3" },
+        _vm._l(_vm.events, function(event, index) {
+          return _c("div", { key: index, staticClass: "card mb-3" }, [
+            _c("div", { staticClass: "additional" }, [
+              _c("div", { staticClass: "user-card" }, [
+                _c("div", { staticClass: "calendar date" }, [
+                  _c("span", { staticClass: "binds" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "month" }, [
+                    _vm._v(_vm._s(_vm._f("FormatMonth")(event.eventStart)))
+                  ]),
+                  _vm._v(" "),
+                  _c("h1", { staticClass: "day" }, [
+                    _vm._v(_vm._s(_vm._f("FormatDate")(event.eventStart)))
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "more-info" }, [
+                _c("h5", { staticClass: "text-white p-2" }, [
+                  _vm._v(_vm._s(event.events.toUpperCase()))
                 ]),
                 _vm._v(" "),
-                _c("h1", { staticClass: "day" }, [
-                  _vm._v(_vm._s(_vm._f("FormatDate")(event.eventStart)))
+                _c("hr"),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-white p-2" }, [
+                  _vm._v(_vm._s(event.except))
                 ])
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "more-info" }, [
-              _c("h5", { staticClass: "text-white p-2" }, [
+            _c("div", { staticClass: "general" }, [
+              _c("h5", { staticClass: "mt-2" }, [
                 _vm._v(_vm._s(event.events.toUpperCase()))
               ]),
               _vm._v(" "),
               _c("hr"),
               _vm._v(" "),
-              _c("p", { staticClass: "text-white p-2" }, [
-                _vm._v(_vm._s(event.except))
-              ])
+              _c("p", [_vm._v(_vm._s(event.description))]),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "more" },
+                [
+                  _c("icon", { attrs: { icon: "users" } }),
+                  _vm._v(
+                    "\n          " + _vm._s(event.department) + "\n        "
+                  )
+                ],
+                1
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "general" }, [
-            _c("h5", { staticClass: "mt-2" }, [
-              _vm._v(_vm._s(event.events.toUpperCase()))
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(event.description))]),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "more" },
-              [
-                _c("icon", { attrs: { icon: "users" } }),
-                _vm._v(" " + _vm._s(event.department))
-              ],
-              1
-            )
           ])
-        ])
-      }),
-      0
-    )
-  ])
+        }),
+        0
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -66785,7 +66819,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-9" }, [
+  return _c("div", { staticClass: "col-md-9 main-body" }, [
     _c(
       "div",
       { staticClass: "container-fluid mt-3" },
@@ -66824,7 +66858,7 @@ var render = function() {
               [
                 _c(
                   "option",
-                  { attrs: { value: "", SELECTED: "", DISABLED: "" } },
+                  { attrs: { value: "", selected: "", disabled: "" } },
                   [_vm._v("--Select Service Name--")]
                 ),
                 _vm._v(" "),
@@ -67380,7 +67414,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-9" }, [
+  return _c("div", { staticClass: "col-md-9 main-body" }, [
     _c("div", { staticClass: "container-fluid mt-3" }, [
       _c("div", { staticClass: "row mt-4" }, [
         _c("div", { staticClass: "col-md-3 border-right overflow-auto" }, [
@@ -67427,7 +67461,7 @@ var render = function() {
                       _c("div", { staticClass: "searchResult" }, [
                         _c(
                           "h3",
-                          { staticClass: "mb-4 " },
+                          { staticClass: "mb-4" },
                           [
                             _c(
                               "router-link",
@@ -84456,8 +84490,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\charter\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\charter\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\xampp\htdocs\charter\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\xampp\htdocs\charter\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

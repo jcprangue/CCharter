@@ -11134,6 +11134,19 @@ body {
   height: 15px;
 }
 
+.navigationbar {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+}
+
+.main-body {
+  position: absolute;
+  margin-top: 80px;
+  overflow: auto;
+  height: 100%;
+}
+
 .department-blockquote {
   position: relative;
   display: inline-block;
